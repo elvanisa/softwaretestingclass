@@ -23,7 +23,7 @@ describe('Verify Login Functionality', () => {
     cy.get('[data-test="error"]').should('be.visible')
     cy.get('[data-test="error"]').should('contain.text','Sorry, this user has been locked out.')
   })
-  it.skip('Failed Login - Username Required', () => {
+  it('Failed Login - Username Required', () => {
     cy.visit('https://www.saucedemo.com/')
     cy.get('.submit-button.btn_action').click()
     cy.get('[data-test="error"]').should('be.visible')

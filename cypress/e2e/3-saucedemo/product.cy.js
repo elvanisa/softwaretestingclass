@@ -33,5 +33,6 @@ describe('Verify Add Product Functionality', () => {
         cy.get('.shopping_cart_link').should('contain.text','2')
         cy.get('[data-test="remove-sauce-labs-backpack"]').click()
         cy.get('.shopping_cart_link').should('contain.text','1')
+        //tambah data
     })
   })

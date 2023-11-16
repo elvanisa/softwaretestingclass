@@ -1,0 +1,32 @@
+describe('Verify Login Functionality', () => {
+  it('Success Login', () => {
+    cy.visit('https://www.saucedemo.com/')
+    cy.get('#user-name').type('standard_user')
+    cy.get('[data-test="password"]').type('secret_sauce')
+    cy.get('.submit-button.btn_action').click()
+    cy.url().should('include', '/inventory.html')
+    cy.get('.title').should('be.visible')
+  })
+  it('Failed Login - Wrong password', () => {
+    cy.visit('https://www.saucedemo.com/')
+    cy.get('#user-name').type('standard_user')
+    cy.get('[data-test="password"]').type('salahpassword123')
+    cy.get('.submit-button.btn_action').click()
+    cy.get('[data-test="error"]').should('be.visible')
+    cy.get('[data-test="error"]').should('contain.text','password do not match')
+  })
+  it('Failed Login - Locked User', () => {
+    cy.visit('https://www.saucedemo.com/')
+    cy.get('#user-name').type('locked_out_user')
+    cy.get('[data-test="password"]').type('secret_sauce')
+    cy.get('.submit-button.btn_action').click()
+    cy.get('[data-test="error"]').should('be.visible')
+    cy.get('[data-test="error"]').should('contain.text','Sorry, this user has been locked out.')
+  })
+  it.skip('Failed Login - Username Required', () => {
+    cy.visit('https://www.saucedemo.com/')
+    cy.get('.submit-button.btn_action').click()
+    cy.get('[data-test="error"]').should('be.visible')
+    cy.get('[data-test="error"]').should('contain.text','Username is required')
+  })
+})
